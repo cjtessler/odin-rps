@@ -60,6 +60,9 @@ function getPlayerChoice() {
 
 async function playRound(playerSelection) {
 
+    let resultText = document.querySelector('.result');
+    resultText.innerHTML = "&nbsp";
+     
     flashText();
     await sleep(interval * 3);
 
@@ -78,16 +81,24 @@ async function playRound(playerSelection) {
     const computerNum = REVERSED[computerSelection] 
     let result = (computerNum - playerNum + 3) % 3;
 
+
+    // Update based on results
+
     if (result === 2) {
         playerScore += 1;
         playerBox.style.borderColor = "green";
         computerBox.style.borderColor = "red";
+        resultText.innerHTML = "🧑 Wins!"
     } else if (result === 1) {
         computerScore += 1;
         playerBox.style.borderColor = "red";
         computerBox.style.borderColor = "green";
+        resultText.innerHTML = "🤖 Wins!"
     } else {
         drawScore += 1;
+        playerBox.style.borderColor = "yellow";
+        computerBox.style.borderColor = "yellow";
+        resultText.innerHTML = "Draw!"
     }
 
     setScore(playerScore, computerScore, drawScore);

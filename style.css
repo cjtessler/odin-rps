@@ -59,7 +59,7 @@ html {
     display: flex;
 }
 
-.tool-box {
+.tool-box, .play-box {
     border: 2px solid whitesmoke;
     border-radius: 25%;
     background-color: var(--background-box);
@@ -89,20 +89,24 @@ html {
     }
 }
 
-.announcement, .result {
+.announcement, .result, .instructions {
     font-size: 3rem;
     color:whitesmoke;
 }
 
 .result {
     padding-bottom: 2rem;
+    line-height: .5rem;
 }
 
-.instructions {
-    font-size: 3rem;
-    color:whitesmoke;
-}
 
 .choice-container {
     display: flex;
+}
+
+.icon {
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
