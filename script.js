@@ -31,8 +31,9 @@ tools.forEach(tool => {
     });
 });
 
-
+// Start Game
 playGame();
+
 
 /* FUNCTIONS */
 function reverseKeyValues(obj) {
