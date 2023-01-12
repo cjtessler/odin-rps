@@ -4,8 +4,11 @@
     margin: 0;
 }
 
+:root{
+    --background-box: rgba(0, 0, 0, 0.274);
+}
+
 html {
-    background-color: grey;
     font-family: sans-serif;
 }
 
@@ -35,32 +38,32 @@ html {
     100%{background-position: 0% 50%}
 }
 
+.scoreboard-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
 .scoreboard {
-    border: 2px solid black;
+    border: 2px solid whitesmoke;
+    background-color: var(--background-box);
+    border-radius: 18px;
+    padding: .75rem;
+    color: whitesmoke;
     width: fit-content;
     height: fit-content;
     font-size: 3rem;
 }
 
-.choices {
-    display: flex;
-    background-color: mistyrose;
-    gap: 100px;
-}
-
-.choices > div {
-    border: 2px solid blue;
-    width: 100px;
-    height: 100px;
-}
-
 .tools {
+    flex: 1;
     display: flex;
 }
 
-.tools > div {
-    border: 2px solid red;
+.tool {
+    border: 2px solid whitesmoke;
     border-radius: 25%;
+    background-color: var(--background-box);
     width: 100px;
     height: 100px;
     font-size: 3rem;
@@ -72,10 +75,9 @@ html {
     transition: all .2s ease-in-out;
 }
 
-.tools > div:hover {
+.tool:hover {
     transform: scale(1.1);
-    background-color: burlywood; 
-
+    background-color: #2e2c9a ; 
 }
 
 .selected {
@@ -84,6 +86,19 @@ html {
 
 @keyframes blinker {
     50% {
-        background-color: red;
+        background-color: rgb(173, 107, 184);
     }
+}
+
+.choices {
+    flex: 1;
+    display: flex;
+    background-color: mistyrose;
+    gap: 100px;
+}
+
+.choices > div {
+    border: 2px solid blue;
+    width: 100px;
+    height: 100px;
 }
