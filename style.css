@@ -1,0 +1,72 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    background-color: grey;
+    font-family: sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.scoreboard {
+    border: 2px solid black;
+    width: fit-content;
+    height: fit-content;
+    font-size: 3rem;
+}
+
+.choices {
+    display: flex;
+    background-color: mistyrose;
+    gap: 100px;
+}
+
+.choices > div {
+    border: 2px solid blue;
+    width: 100px;
+    height: 100px;
+}
+
+.tools {
+    display: flex;
+}
+
+.tools > div {
+    border: 2px solid red;
+    border-radius: 25%;
+    width: 100px;
+    height: 100px;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 2rem;
+    transition: all .2s ease-in-out;
+}
+
+.tools > div:hover {
+    transform: scale(1.1);
+    background-color: burlywood; 
+
+}
+
+.selected {
+    animation: blinker .2s linear 2;
+}
+
+@keyframes blinker {
+    50% {
+        background-color: red;
+    }
+}

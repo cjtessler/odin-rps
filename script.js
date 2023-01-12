@@ -5,12 +5,36 @@ const CHOICES = {
 }
 
 const REVERSED = reverseKeyValues(CHOICES);
-
 const numRounds = 5;
 const PLAYER = 1;
 const COMPUTER = -1;
 const DRAW = 0
+let playerScore = 0;
+let computerScore = 0;
+let drawScore = 0;
 
+// Add event listeners
+let tools = document.querySelectorAll('.tool');
+console.log(tools);
+
+tools.forEach(tool => {
+    tool.addEventListener('mousedown', e => {
+        e.target.classList.add('selected');
+    });
+});
+
+tools.forEach(tool => {
+    tool.addEventListener('mouseup', e => {
+        setTimeout(function() {
+            e.target.classList.remove('selected')
+        }, 800);
+    });
+});
+
+
+playGame();
+
+/* FUNCTIONS */
 function reverseKeyValues(obj) {
     const reversed = {};
     for (const key in obj) {
@@ -29,65 +53,46 @@ function getPlayerChoice() {
     return choice.toLowerCase();
 }   
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    // randomly select computer's choice
+    let computerSelection = getComputerChoice();
+    console.log("computerSelection:", computerSelection)
+
+    // conversion for equation
     const playerNum = REVERSED[playerSelection]
     const computerNum = REVERSED[computerSelection] 
     let result = (computerNum - playerNum + 3) % 3;
 
     if (result === 2) {
-        // return  `You win! ${playerSelection.toUpperCase()} beats ${computerSelection}`;
-        return PLAYER
+        playerScore += 1;
     } else if (result === 1) {
-        // return `You lose! ${computerSelection.toUpperCase()} beats ${playerSelection}`;
-        return COMPUTER
+        computerScore += 1;
     } else {
-        // return "Draw!";
-        return 0
+        drawScore += 1;
     }
+
+    setScore(playerScore, computerScore, drawScore);
 }
 
-function playGame(numRounds) {
+function setScore(playerScore, computerScore, drawScore) {
+    const scoreboard = document.querySelector('.scoreboard');
+    console.log(scoreboard);
+    scoreboard.innerHTML = playerScore + '-' + computerScore + '-' + drawScore;
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let scoreString;
-
-    for (let i = 0; i < numRounds; i++) {
-
-        // Make moves section
-        let playerSelection = getPlayerChoice();
-        let computerSelection = getComputerChoice();
-        console.log("computerSelection:", computerSelection)
-    
-        // play round
-        let result = playRound(playerSelection, computerSelection)
-        
-        // update overall score (playRound returns -1, 0, or 1)
-
-        // Share results of round
-        if (result === 1) {
-            playerScore += 1;
-            scoreString =  `${playerScore}-${computerScore}`;
-            alert(`You WIN that round! ${playerSelection.toUpperCase()} beats ${computerSelection}\nScore: ${scoreString}`);
-            scoreString =  `${playerScore}-${computerScore}`;
-        } else if (result === -1) {
-            computerScore += 1;
-            scoreString =  `${playerScore}-${computerScore}`;
-            alert(`You LOSE that round! ${computerSelection.toUpperCase()} beats ${playerSelection}\nScore: ${scoreString}`);
-        } else {
-            scoreString =  `${playerScore}-${computerScore}`;
-            alert(`That round was a DRAW!\nScore: ${scoreString}`);
-        }
-    }
-    
-    // Share results of game
-    if (playerScore > computerScore) {
-        alert(`You WIN ${scoreString}`);
-    } else if (playerScore < computerScore) {
-        alert(`You LOSE ${scoreString}`);
-    } else {
-        alert(`DRAW ${scoreString}`);
-    }
 }
 
-playGame(5)
+function playGame() {
+
+    const tools = document.querySelectorAll('.tools');
+
+    // set score
+    setScore(playerScore, computerScore, drawScore);
+
+    tools.forEach((tool) => {
+        tool.addEventListener('click', (e) => {
+            let playerSelection = e.target.id;
+            // play round
+            let result = playRound(playerSelection)
+        });
+    });
+}
